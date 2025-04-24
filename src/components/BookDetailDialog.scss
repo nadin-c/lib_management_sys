@@ -1,0 +1,51 @@
+.book-dialog {
+  .MuiDialogTitle-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .book-dialog__close-btn {
+    padding: 4px;
+  }
+
+  .book-dialog__image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .book-dialog__image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .book-dialog__info {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  
+  .MuiTypography-root {
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .book-dialog__image-container {
+      justify-content: center;
+    }
+
+    .book-dialog__image {
+      max-width: 200px;
+    }
+
+    .book-dialog__info {
+      padding-left: 10px;
+    }
+  }
+}

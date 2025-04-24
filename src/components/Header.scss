@@ -1,0 +1,124 @@
+.header {
+  background-color: #f8f9fa;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__left {
+    flex: 1;
+  }
+
+  &__search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  &__menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  &__nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+
+    li a {
+      text-decoration: none;
+      color: #333;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+
+    &--open {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+
+  // Media Queries
+  @media (max-width: 768px) {
+    &__search-bar {
+      flex-direction: column;
+      align-items: stretch;
+
+      input,
+      button {
+        width: 100%;
+      }
+    }
+
+    &__menu-toggle {
+      display: block;
+    }
+
+    &__nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    &__nav-links--open {
+      display: flex;
+    }
+  }
+}
+
+// Optional: Style for search results
+.search-results {
+  padding: 2rem;
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .book-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }
+}
