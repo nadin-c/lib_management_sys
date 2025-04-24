@@ -32,7 +32,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
 
   return (
     <>
-      <div className="book-card" onClick={handleCardClick} style={{cursor:'pointer'}}>
+      <div className="book-card" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         <div className="book-card__favourite" onClick={handleFavouriteClick}>
           {isFavourite ? (
             <FaHeart className="book-card__favourite-icon filled" />
@@ -57,12 +57,10 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
       <BookDetailDialog
         open={openDialog}
         onClose={handleCloseDialog}
-        title={book.title}
-        thumbnailUrl={book.thumbnailUrl}
-        publishedDate={book.publishedDate?.$date || 'Unknown'}
-        authors={book.authors}
-        pageCount={book.pageCount}
-        longDescription={book.longDescription}
+        book={{
+          ...book,
+          publishedDate: book.publishedDate?.$date || 'Unknown',
+        }}
       />
     </>
   );

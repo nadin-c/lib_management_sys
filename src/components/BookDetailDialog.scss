@@ -1,51 +1,55 @@
-.book-dialog {
-  .MuiDialogTitle-root {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .book-dialog__close-btn {
-    padding: 4px;
-  }
+.dialog-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
 
-  .book-dialog__image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-  }
+.dialog-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  .book-dialog__image {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    object-fit: cover;
-  }
+.dialog-body {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
 
-  .book-dialog__info {
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.dialog-body img {
+  width: 150px;
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-  
-  .MuiTypography-root {
-    margin-bottom: 8px;
-  }
+.dialog-details {
+  flex: 1;
+  overflow-y: auto;
+}
 
-  @media (max-width: 600px) {
-    .book-dialog__image-container {
-      justify-content: center;
-    }
-
-    .book-dialog__image {
-      max-width: 200px;
-    }
-
-    .book-dialog__info {
-      padding-left: 10px;
-    }
-  }
+.dialog-description {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  white-space: pre-wrap;
 }

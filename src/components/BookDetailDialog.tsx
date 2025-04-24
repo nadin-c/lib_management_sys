@@ -1,76 +1,35 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Grid,
-  Typography,
-  IconButton,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-
 import './BookDetailDialog.scss';
+import Book from '../types/Book';
 
 interface BookDetailDialogProps {
+  book: Book | null;
   open: boolean;
   onClose: () => void;
-  title: string;
-  thumbnailUrl: string;
-  publishedDate?: string;
-  authors?: string[];
-  pageCount?: number;
-  longDescription?: string;
 }
 
-const BookDetailDialog: React.FC<BookDetailDialogProps> = ({
-  open,
-  onClose,
-  title,
-  thumbnailUrl,
-  publishedDate = 'Unknown',
-  authors = [],
-  pageCount,
-  longDescription = 'No detailed description available.',
-}) => {
-  const getImageUrl = () => {
-    try {
-      return thumbnailUrl ? thumbnailUrl : '/placeholder-image.jpg';
-    } catch (error) {
-      console.error('Invalid thumbnail URL:', error);
-      return '/placeholder-image.jpg';
-    }
-  };
+const BookDetailDialog: React.FC<BookDetailDialogProps> = ({ book, open, onClose }) => {
+  if (!open || !book) return null;
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth className="book-dialog">
-      <DialogTitle>
-        {title}
-        <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close" className="book-dialog__close-btn">
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} className="book-dialog__image-container">
-            <img
-              src={getImageUrl()}
-              alt={`${title} cover`}
-              className="book-dialog__image"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder-image.jpg';
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={8} className="book-dialog__info">
-            <Typography><strong>Published Date:</strong> {publishedDate}</Typography>
-            <Typography><strong>Authors:</strong> {authors.length > 0 ? authors.join(', ') : 'Unknown'}</Typography>
-            <Typography><strong>Page Count:</strong> {pageCount || 'N/A'}</Typography>
-            <Typography><strong>Description:</strong></Typography>
-            <Typography variant="body2">{longDescription}</Typography>
-          </Grid>
-        </Grid>
-      </DialogContent>
-    </Dialog>
+    <div className="dialog-overlay" onClick={onClose}>
+      <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
+        <button className="dialog-close" onClick={onClose}>×</button>
+        <h2>{book.title}</h2>
+        <div className="dialog-body">
+          <img src={book.thumbnailUrl || '/placeholder-image.jpg'} alt={book.title} />
+          <div className="dialog-details">
+            <p><strong>Published Date:</strong> {book.publishedDate?.$date || 'Unknown'}</p>
+            <p><strong>Authors:</strong> {book.authors?.join(', ') || 'Unknown'}</p>
+            <p><strong>Page Count:</strong> {book.pageCount || 'N/A'}</p>
+            <p><strong>Description:</strong></p>
+            <div className="dialog-description">
+              {book.longDescription ? book.longDescription : 'No detailed description available.'}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
